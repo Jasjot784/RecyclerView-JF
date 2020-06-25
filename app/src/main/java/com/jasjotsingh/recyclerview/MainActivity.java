@@ -1,5 +1,6 @@
 package com.jasjotsingh.recyclerview;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,6 +20,7 @@ import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
     private final LinkedList<String> mWordList = new LinkedList<>();
+    private final LinkedList<String> mWordList2 = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private WordListAdapter mAdapter;
     @Override
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 20; i++) {
             mWordList.addLast("Word " + i);
         }
+        mWordList2.addAll(mWordList);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -78,9 +81,15 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            reset();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void reset(){
+        Intent intent = new Intent(MainActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
